@@ -1,6 +1,12 @@
+import React from "react";
+import Sidebar from './components/Sidebar/Sidebar'
+
 function App() {
     return (
-      <h1>Test</h1>
+      <>
+      <Sidebar/>
+      </>
+      
     );
   }
   
