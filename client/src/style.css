@@ -1,15 +1,72 @@
 *{
     font-family: 'Montserrat', sans-serif;
+    transition: .3s;
 }
 
-body{
+#root{
     height: 100vh;
     width: 100vw;
     display: flex;
+    background-color: rgb(24, 24, 24);
 }
 
+body{
+    overflow: hidden;
+}
 .sidebar{
     height: 100%;
-    width: 200px;
+    width: 250px;
     background-color: rgb(17, 17, 17);
+}
+
+.nav-link{
+    opacity: .5;
+}
+
+.active{
+    opacity: 1;
+}
+
+#search{
+    background-color: rgb(32, 32, 32);
+    border: none;
+}
+
+#avi{
+    border-radius: 100px;
+}
+
+#account{
+    opacity: .5;
+}
+
+#account:hover{
+    opacity: 1;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: rgba(126, 239, 104, 0);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0) inset, 0 0 8px rgba(126, 239, 104, 0);
+  outline: 0 none;
+}
+
+.main{
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
