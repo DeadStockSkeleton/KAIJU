@@ -5,7 +5,7 @@ import Account from '../Account/Account'
 function Navbar() {
     return (
         <>
-        <nav className="navbar p-3">
+        <nav className="navbar p-3 sticky-top">
                 <input autoComplete="off" type="search" placeholder="search" id="search" className="form-control px-4 text-light rounded-pill mx-auto w-50"/>
                 <Account/>
         </nav>

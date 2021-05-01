@@ -1,16 +1,20 @@
 import '../../style.css';
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter as Router, Route  } from 'react-router-dom';
+
 
 function Manga(props) {
     return (
         <>
-        <Link to={"/manga/"+props.manga.id}>
-            <span>
-                <img width="90%" src={props.manga.img} alt={props.manga.name} className="m-2"/>
-                <p>{props.manga.name}</p>
+        {props.mangas.map(manga => (
+         <Link className="text-decoration-none lh-lg" to={"/manga/"+manga.id}>
+            <span className="manga text-center text-light">
+                <img width="90%" src={manga.img} alt={manga.name} className="m-2 manga-img"/>
+                <p>{manga.name}</p>
             </span>
-        </Link>
+        </Link>   
+        ))}
+        
       </>
     );
   }
