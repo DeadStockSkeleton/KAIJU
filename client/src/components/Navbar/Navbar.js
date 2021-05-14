@@ -1,16 +1,21 @@
-import '../../style.css';
-import React from "react";
-import Account from '../Account/Account'
-
+import KaijuLogo from "../../assets/icons/KAIJU.svg";
+import Lbar from './Lbar';
+import { Link, useLocation } from "react-router-dom";
+import cn from 'classnames';
 function Navbar() {
-    return (
-        <>
-        <nav className="navbar p-3 sticky-top">
-                <input autoComplete="off" type="search" placeholder="search" id="search" className="form-control px-4 text-light rounded-pill mx-auto w-50"/>
-                <Account/>
-        </nav>
-      </>
-    );
-  }
-  
-  export default Navbar;
+  const location = useLocation();
+  return (
+    <>
+      <nav className={location.pathname === '/login' || location.pathname === '/signup' ? ("navbar sticky-top"): ("login-true navbar sticky-top")}>
+        <div className="container-fluid lbar p-2">            
+        <b className={location.pathname === '/login' || location.pathname === '/signup' ? ("text-dark nav-logo navbar-brand") : ("text-light nav-logo navbar-brand")}>KAIJU<span className="text-primary">CODE</span></b>
+
+          {location.pathname === '/login' || location.pathname === '/signup' ? (<></>) : (<Lbar />)}
+            
+        </div>
+      </nav>
+    </>
+  );
+}
+
+export default Navbar;

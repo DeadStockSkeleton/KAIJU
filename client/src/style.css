@@ -1,53 +1,50 @@
 *{
     font-family: 'Montserrat', sans-serif;
+    transition: .2s;
+}
+
+
+.navbar{
+    width: inherit;
+    
+    
+}
+
+
+
+.login-false{
+    background-color: transparent;
+}
+
+.login-true, .Dashboard{
+    background-color: #1b1b20;
+}
+
+.nav-logo{
+    font-size: 18px;
+}
+
+.search-input, .signup-input{
+    background-color: transparent;
     transition: .3s;
-}
-
-#root{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    background-color: rgb(24, 24, 24);
-    max-height: 100vh;
-}
-
-.discover-nav{
-    background-color: rgb(24, 24, 24);
-}
-
-.sidebar{
-    height: 100%;
-    width: 250px;
-    background-color: rgb(17, 17, 17);
-}
-
-.nav-link{
-    opacity: .5;
-}
-
-.active{
-    opacity: 1;
-}
-
-#search{
-    background-color: rgb(32, 32, 32);
+    display: table-cell;
+    font-size: inherit;
     border: none;
+    box-shadow: none;
+    height: inherit;
 }
-
-#avi{
-    border-radius: 100px;
+.lbar{
+  vertical-align: middle;  
 }
-
-#account{
+.search-wrapper:hover{
+    background-color: #1b1b20;
+}
+input{
     opacity: .5;
 }
-
-#account:hover{
-    opacity: 1;
+input:hover{
+    opacity: .7;
 }
-
-
-
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
@@ -64,29 +61,141 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {   
-  border-color: rgba(126, 239, 104, 0);
+    background-color: transparent;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0) inset, 0 0 8px rgba(126, 239, 104, 0);
   outline: 0 none;
+  transition: .3s;
+  opacity: 1;
 }
 
-.main{
-    max-height: 100vh;
-}
-
-Link{
+.search-select{
+    padding: 5px;
+    height: inherit;
     cursor: pointer;
+    outline: none;
+    font-size: 14px;
+    background-color: transparent;
+    color: #ffffff;
+    margin: 5px;
+    text-align: center;
+    border: 1px solid #2b2b2e;
+    border-radius: inherit;
+    width: 35px;
+    opacity: .5;
 }
 
-.manga-img{
-    border-radius: 10px;
+.search-select:hover{
+    opacity: 1;
 }
 
-.main-container {
-    overflow-x: hidden;
-    overflow-y: scroll;
-    max-height: 75vh;
+
+
+.search-wrapper, .account-wrapper{
+    vertical-align: middle;
+    background-color: #1b1b20;
+    border: 1px solid #2b2b2e;
+    height: inherit;
+    cursor: pointer;
+    
 }
 
-body{
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    text-align-last:center;
+    
+}
+
+.section{
+    width: 100%;
+    height: 100%;
+    /* background-color: #16161a; */
+}
+
+.account-wrapper{
+    width: 5%;
+}
+
+.signup-section{
+    background-color: white;
+}
+
+.signup-form{
+    width: 50%;
+}
+
+
+.false{
+    border: 1px solid #2b2b2e;
+}
+
+.status{
+    width: 25%;
+    height: 25px;
+    border-radius: inherit;
+    position: relative;
+    font-size: 12px;
+    line-height: 25px;
+left: 10%;
+top: 6px;
+float: left;}
+
+.false{
+    width: 0px;
+    left: 0%;
     overflow: hidden;
+    border: 1px solid #ffffff00;
+    background-color:rgba(158, 202, 162, 0);
+    color: #ffffff00; 
 }
+
+
+
+.valid{
+    border: 1px solid #008607;
+    background-color:rgba(158, 202, 162, 0.788);
+    color: #008607; 
+}
+
+.wrong{
+    border: 1px solid #860000;
+    background-color:rgba(231, 152, 152, 0.788);
+    color: #860000;
+}
+
+.nav-link{
+    border: 1px solid #9c9c9c;
+    margin: 5px;
+    color:#9c9c9c;
+    background-color:rgba(226, 226, 226, 0.788);
+    opacity: .5;
+}.nav-link:hover{
+    color: inherit;
+opacity: 1;
+}
+
+.regActive{
+    border: 1px solid #0d6efd;
+    color:#ffffff;
+    background-color:#0d6dfdb0; 
+    opacity: 1;
+}
+
+.regActive:hover{
+    color: white;
+    background-color:#0d6dfd;
+}
+
+a,a:hover{
+    color: inherit;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .signup-form{
+        width: 100%;
+    }
+  }

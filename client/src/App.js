@@ -1,50 +1,27 @@
-import React, { Component,  } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Sidebar from './components/Sidebar/Sidebar';
+import Login from './components/pages/Login';
+import SignUp from './components/pages/SignUp';
+import Dashboard from './components/pages/Dashboard';
+import Community from './components/pages/Community';
+import Code from './components/pages/Code';
 import Navbar from './components/Navbar/Navbar';
-import Home from './components/pages/Home';
-import Discover from './components/pages/Discover';
-import Favorites from './components/pages/Favorites';
-import Downloads from './components/pages/Downloads';
-import MangaPage from './components/pages/MangaPage';
-import API from './components/utils/API';
-class App extends Component{
-  state = {
-    mangas: []
-}
 
-componentDidMount(){
-this.getMangas();
-}
-
- getMangas(){
-    API.getAll()
-    .then(res => this.setState({ mangas: res}))
-    .catch(err => console.log(err));
-}
-
-  render(){return (
-      <><Router>
-      <Sidebar/>
-      <div className="container">
-        <Navbar/>
-        <div className="container p-4 main">
+function App(){
+return (
+      <Router>
+        <Navbar />      
+        <Route exact path='/login' component={Login}/>
+        <Route exact path='/signup' component={SignUp}/>
         
-          <Route exact path='/' component={Home}/>
-          <Route exact path='/discover' component={Discover}/>
-          <Route exact path='/favorites' component={Favorites}/>
-          <Route exact path='/downloads' component={Downloads}/>
-          <Route exact path={window.location.indexOf = '/manga/'} component={MangaPage}/>
           
-            {this.state.mangas.map(manga => (
-                <Route exact path={'/manga/'+manga.id} component={MangaPage}/>   
-               ))}
-        </div>
-      </div>
+        <Route exact path='/' component={Dashboard}/>
+        <Route exact path='/community' component={Community}/>
+        <Route exact path='/code' component={Code}/>
+        
       </Router>
-      </>
       
-    );}
+    );
     
   }
   

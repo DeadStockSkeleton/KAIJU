@@ -16,17 +16,20 @@ User.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        tele: {
-            type: DataTypes.INTEGER,
+        
+        username: {
+            type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-            validate: {
-                len: [10],
-            },
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
             validate: {
                 len: [8],
             },
