@@ -1,10 +1,14 @@
-import img from '../../assets/icons/defaultAvi.png'
+import img from '../../assets/icons/defaultAvi.png';
+import Script from '../utils/script';
 function Account() {
+    function logout(){
+        Script.Logout()
+    }
   return (
     <>
-      <div class="form-control border-0 account-wrapper mx-4 p-0 position-relative d-flex flex-justify-between flex-items-center">
-          <p></p>
-          </div>
+      <button onClick={() => logout()} className="btn text-light">
+      Logout
+      </button>
     </>
   );
 }

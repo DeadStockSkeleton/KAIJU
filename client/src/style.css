@@ -12,6 +12,7 @@
 
 
 
+
 .login-false{
     background-color: transparent;
 }
@@ -90,13 +91,17 @@ input[type="color"]:focus,
 
 
 
-.search-wrapper, .account-wrapper{
+.search-wrapper, .account-wrapper, .list-project{
     vertical-align: middle;
     background-color: #1b1b20;
     border: 1px solid #2b2b2e;
     height: inherit;
     cursor: pointer;
     
+}
+
+.list-project{
+    background-color: #18181b; 
 }
 
 select {
@@ -114,9 +119,11 @@ select {
     /* background-color: #16161a; */
 }
 
-.account-wrapper{
-    width: 5%;
+.search-form{
+    width: 50%;
 }
+
+
 
 .signup-section{
     background-color: white;
@@ -170,10 +177,12 @@ float: left;}
     margin: 5px;
     color:#9c9c9c;
     background-color:rgba(226, 226, 226, 0.788);
+    border-radius: 5px;
     opacity: .5;
 }.nav-link:hover{
     color: inherit;
 opacity: 1;
+
 }
 
 .regActive{
@@ -183,19 +192,76 @@ opacity: 1;
     opacity: 1;
 }
 
-.regActive:hover{
+
+
+a,a:hover{
+    cursor: pointer;
+    color: inherit;
+}
+
+#root{
+    height: 100vh;
+    width: 100vw;;
+}
+
+.projects-library-wrapper{
+    display: flex;
+    background-color: #16161d;
+    max-height: 100%;
+}
+
+.select-active{
+    border: 1px solid #0d6efd;
+    color:#ffffff;
+    background-color:#0d6dfdb0; 
+    color: white;
+}
+
+.list-project:hover{
+    background-color: #1e1e27;
+}
+
+.project-tabs{
+    max-height: 100%;
+    overflow: scroll;
+}
+.regActive:hover, .select-active:hover{
     color: white;
     background-color:#0d6dfd;
 }
 
-a,a:hover{
-    color: inherit;
+.list-group, .project-tabs, #root{
+    overflow: hidden;
 }
-
-
 
 @media only screen and (max-width: 600px) {
     .signup-form{
         width: 100%;
+    }
+
+    .nav-logo{
+        text-align: center;
+        width: 100%;
+        font-size: 25px;
+    }
+
+    .regActive{
+        background-color:#0d6dfd;
+        opacity: 1;
+    }
+
+    .search-form{
+        width: inherit;
+    }
+
+    .project-search{
+        display: none;
+    }
+    .projects-library-wrapper{
+        display: block;
+    }
+    .project-tabs{
+        max-height: 150px;
+        overflow: scroll;
     }
   }

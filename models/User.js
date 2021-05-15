@@ -34,6 +34,11 @@ User.init(
                 len: [8],
             },
         },
+        active: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        }
     },
     {
         hooks: {

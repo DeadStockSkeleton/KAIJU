@@ -10,19 +10,20 @@ class Lbar extends Component {
       };
 
   render() {return (
-    <div className=" d-flex search-container col">
-      <form class="search-form w-50 mx-auto">
-        <label class="form-control search-wrapper p-0 position-relative d-flex flex-justify-between flex-items-center">
+      <>
+    <div className=" d-flex search-container  col">
+      <form class="search-form mx-auto">
+        <label class="form-control search-wrapper p-0 position-relative d-flex">
           <select onChange={this.handleChange}
             class="form-select form-select-sm search-select"
           >
             <option value="Username">@</option>
             <option value="Projects">/</option>
-            <option value="Code">#</option>
+            <option value="Post">#</option>
           </select>
           <input
             type="text"
-            class="form-control text-light search-input input-sm"
+            class="form-control text-light search-input"
             placeholder={"Search "+this.state.searchType}
             autocapitalize="off"
             spellcheck="false"
@@ -33,8 +34,9 @@ class Lbar extends Component {
         </label>
       </form>
 
-      
+      <Account />
     </div>
+    </>
   );}
   
 }

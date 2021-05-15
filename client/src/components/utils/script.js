@@ -8,6 +8,7 @@ export default {
         headers: { "Content-Type": "application/json" },
       }).then((res) => {
         if (res.status === 200) {
+          localStorage.setItem('token', "token");
           window.location.href = "/";
         }
       });
@@ -18,5 +19,49 @@ export default {
       fetch('/', {
           method: 'GET'
       }).then((res) => {return res});
+  }
+,
+  Login: function(email, pass){
+    if (email&& pass){
+        fetch('/login', {
+            method: "POST",
+            body: JSON.stringify({ email, pass }),
+            headers: { "Content-Type": "application/json" },
+          }).then((res) => {
+            if (res.status === 200) {
+              localStorage.setItem('token', "token");
+              return window.location.href = "/";
+            }
+            localStorage.removeItem('token');
+            return 0;
+          });
+    }
+  },
+
+  Logout: function(){
+      fetch ('/logout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+      }).then(() => {
+        localStorage.removeItem('token');
+          return window.location.href = "/login";
+      });
+  }
+,
+  isLoggedIn: async function(){
+     await fetch('/auth', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+      }).then((response) => response.json()).then((auth) => {
+       console.log(auth) 
+       if (auth === true){
+            return true
+        }else{
+            return false
+        };
+
+      }).catch(err => {
+        return err;
+      })
   }
 };
