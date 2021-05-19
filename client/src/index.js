@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
-import './script.js';
 
 ReactDOM.render(<App />, document.getElementById('root'));
   

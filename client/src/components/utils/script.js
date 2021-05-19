@@ -1,3 +1,5 @@
+
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   signUp: function (email, username, password) {
@@ -53,7 +55,6 @@ export default {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
       }).then((response) => response.json()).then((auth) => {
-       console.log(auth) 
        if (auth === true){
             return true
         }else{
@@ -63,5 +64,29 @@ export default {
       }).catch(err => {
         return err;
       })
+  }
+  , createProject: async function(body, file){
+    await fetch('/project', {
+      method: 'POST',
+      body:JSON.stringify({body}, {file}),
+      headers: { 'Content-Type': 'application/json' },
+    }).then((res) => {
+      console.log(res);
+      return window.location.href = '/projects'
+    })
+  },
+
+  createFile: async function(file){
+    await fetch('/file', {
+      method: 'POST',
+      body: JSON.stringify({file})
+    })
+  },
+
+  getProjects: async function(){
+    await fetch('/projects', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
 };

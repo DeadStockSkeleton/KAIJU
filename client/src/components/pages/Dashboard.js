@@ -11,20 +11,7 @@ class Dashboard extends Component {
   // }
   render(){return (
           <>
-          <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <button className="nav-link active">Home</button>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <button>+</button>
-  </li>
-</ul>
+          
           </>
           
         );}

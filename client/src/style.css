@@ -25,7 +25,7 @@
     font-size: 18px;
 }
 
-.search-input, .signup-input{
+.search-input, .signup-input, .file-name-input, .project-desc{
     background-color: transparent;
     transition: .3s;
     display: table-cell;
@@ -37,7 +37,7 @@
 .lbar{
   vertical-align: middle;  
 }
-.search-wrapper:hover{
+.search-wrapper:hover, .project-desc:hover, .project-title:hover{
     background-color: #1b1b20;
 }
 input{
@@ -46,6 +46,8 @@ input{
 input:hover{
     opacity: .7;
 }
+
+
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
@@ -68,8 +70,22 @@ input[type="color"]:focus,
   transition: .3s;
   opacity: 1;
 }
+.project-link{
+    background: transparent;
+}
 
-.search-select{
+.project-link:focus{
+    border: 1px solid #0d6efd;
+    color:#ffffff;
+    background-color:#0d6dfdb0; 
+    opacity: 1;
+}
+
+.project-link:hover{
+    background-color: #1b1b20;
+    border: 1px solid #2b2b2e;
+}
+.search-select, .profile-icon, .add-btn, .type-select{
     padding: 5px;
     height: inherit;
     cursor: pointer;
@@ -85,13 +101,34 @@ input[type="color"]:focus,
     opacity: .5;
 }
 
+.profile-icon{
+    opacity: 1;;
+}
 .search-select:hover{
     opacity: 1;
 }
 
+.project-desc:hover{
+    background-color: #1b1b20;
+    max-height: 50%;
+    overflow: hidden;
+}
+.project-desc:focus{
+    max-height: 100%;
+    overflow: scroll;
+}
 
+.project-panel{
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 100%;
+}
 
-.search-wrapper, .account-wrapper, .list-project{
+.add-btn{
+    border: 1px solid #2b2b2e; 
+    color: white;
+}
+.search-wrapper, .account-wrapper, .list-project, .new-project-wrapper{
     vertical-align: middle;
     background-color: #1b1b20;
     border: 1px solid #2b2b2e;
@@ -100,9 +137,7 @@ input[type="color"]:focus,
     
 }
 
-.list-project{
-    background-color: #18181b; 
-}
+
 
 select {
     -webkit-appearance: none;
@@ -133,6 +168,10 @@ select {
     width: 50%;
 }
 
+.project-tabs{
+    max-height: 100%;
+    overflow: auto;
+}
 
 .false{
     border: 1px solid #2b2b2e;
@@ -199,10 +238,7 @@ a,a:hover{
     color: inherit;
 }
 
-#root{
-    height: 100vh;
-    width: 100vw;;
-}
+
 
 .projects-library-wrapper{
     display: flex;
@@ -230,8 +266,50 @@ a,a:hover{
     background-color:#0d6dfd;
 }
 
-.list-group, .project-tabs, #root{
+.list-group, .project-tabs{
     overflow: hidden;
+}
+
+.nav-tabs{
+    background-color: #16161d;
+}
+
+.dash-tab{
+    opacity: 1;
+    background-color: #1b1b20;
+}
+.newProjectModal{
+    z-index: 999;
+    position: fixed;
+    width: 50%;
+    left: 50%;
+top: 30%;
+transform: translate(-50%,-50%);
+background-color: #16161d;
+box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.modal-bg{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.425);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 333;
+}
+
+.project-title{
+    width: 100%;
+    height: inherit;
+    font-size: 25px;
+    background-color: #16161d;
+    outline: none;
+    border: none;
+}
+
+.type-select{
+width: 50px;;
 }
 
 @media only screen and (max-width: 600px) {
@@ -263,5 +341,9 @@ a,a:hover{
     .project-tabs{
         max-height: 150px;
         overflow: scroll;
+    }
+
+    .modal-bg{
+        display: none;
     }
   }

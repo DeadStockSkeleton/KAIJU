@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const path = require("path");
 const User = require('../models/User');
+const Project = require('../models/Project');
+const File = require('../models/File');
 const session = require('express-session');
 const express = require("express");
 const sequelize = require('../config/connection');
@@ -23,7 +25,6 @@ router.use(session(sess));
 router.post('/signup',async  (req,res) => {
   try {
     
-console.log(req.body);
       const userCreate = await User.create({
         username: req.body.username,
         email: req.body.email,
@@ -47,7 +48,6 @@ console.log(req.body);
 
 router.post('/login', async (req, res) => {
   try{
-    console.log(req.body)
     const userData = await User.findOne({
       where: {
         email: req.body.email
@@ -101,6 +101,53 @@ router.post('/logout', (req,res) => {
   return console.log(err)
 }
   
+})
+
+router.post('/project', async (req, res)=>{
+  try{
+    const project = req.body.body;
+    const projData = {
+      title: project.title,
+      desc: project.desc,
+      user_id:req.session.userId
+    }
+
+   await Project.create(projData).then((data) => {
+   
+      
+     
+return res.status(200).json(data)
+   })
+  }catch(err){
+    return console.log(err);
+  }
+})
+
+router.get('/projects', async (req, res) => {
+  try{
+    const projectData = await Project.findAll({
+      where: {
+        user_id:req.session.userId 
+      }
+    })
+
+    const projects = projectData.map((project) => project.get({plain: true}))
+    res.status(200).json(projects);
+  }catch(err){
+    return res.status(500).json(err);
+  }
+})
+
+router.get('/projects/code/:id', async (req, res) => {
+  try{
+const projectData = await Project.findByPk(req.params.id)
+
+const project = projectData.get({plain: true});
+
+return res.status(200).json(project);
+  }catch(err){
+    return res.status(500).json(err);
+  }
 })
 
 router.get('/auth', (req, res) => {
