@@ -7,7 +7,6 @@
 .navbar{
     width: inherit;
     
-    
 }
 
 
@@ -17,7 +16,7 @@
     background-color: transparent;
 }
 
-.login-true, .Dashboard{
+.login-true, .Dashboard, .tab-wrapper{
     background-color: #1b1b20;
 }
 
@@ -47,7 +46,13 @@ input:hover{
     opacity: .7;
 }
 
-
+#root{
+    overflow: hidden;
+    max-height: 50%;
+}
+.editor, .ace_scroller{
+    max-height: 95%;
+}
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
@@ -83,7 +88,6 @@ input[type="color"]:focus,
 
 .project-link:hover{
     background-color: #1b1b20;
-    border: 1px solid #2b2b2e;
 }
 .search-select, .profile-icon, .add-btn, .type-select{
     padding: 5px;
@@ -99,6 +103,10 @@ input[type="color"]:focus,
     border-radius: inherit;
     width: 35px;
     opacity: .5;
+}
+
+#root{
+    height: 100vh;
 }
 
 .profile-icon{
@@ -121,14 +129,14 @@ input[type="color"]:focus,
 .project-panel{
     overflow-x: hidden;
     overflow-y: auto;
-    max-height: 100%;
+
 }
 
 .add-btn{
     border: 1px solid #2b2b2e; 
     color: white;
 }
-.search-wrapper, .account-wrapper, .list-project, .new-project-wrapper{
+.list-group-item,.search-wrapper,.account-card, .account-wrapper, .list-project, .new-project-wrapper{
     vertical-align: middle;
     background-color: #1b1b20;
     border: 1px solid #2b2b2e;
@@ -168,10 +176,7 @@ select {
     width: 50%;
 }
 
-.project-tabs{
-    max-height: 100%;
-    overflow: auto;
-}
+
 
 .false{
     border: 1px solid #2b2b2e;
@@ -243,7 +248,7 @@ a,a:hover{
 .projects-library-wrapper{
     display: flex;
     background-color: #16161d;
-    max-height: 100%;
+    height: 100%;
 }
 
 .select-active{
@@ -312,6 +317,42 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
 width: 50px;;
 }
 
+
+.user-modal{
+    position: absolute;;
+  z-index: 999999999999999999999;
+  top: 155%;
+  width: 300px;
+  left: 50%;
+  margin-left: -250px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.user-modal::after{
+    content: " ";
+  position: absolute;
+  top: 0%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: 32%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #0d6dfd transparent transparent transparent;
+}
+
+.card-header{
+    background-color: transparent;
+}
+
+
+.control-panel-wrapper{
+    background-color:#030913;
+}
+
+.file-sidebar{
+    max-width: 300px;
+    background-color: rgb(211, 211, 211);
+}
+
 @media only screen and (max-width: 600px) {
     .signup-form{
         width: 100%;
@@ -343,7 +384,7 @@ width: 50px;;
         overflow: scroll;
     }
 
-    .modal-bg{
+    .modal-bg, .account-text{
         display: none;
     }
   }

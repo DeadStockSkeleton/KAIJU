@@ -10,7 +10,7 @@ const [selected, setSelected] = useState("")
     setShowModal(prev => !prev)
   }
 function getProject(id){
- fetch(`/projects/code/${id}`, {
+ fetch(`/projects/${id}/code`, {
    method: 'GET'
  }).then((res => res.json())).then((data)=>{
   setSelected(data);
@@ -32,7 +32,8 @@ await fetch('/projects', {
     getProjects();
   }, [])
     return (
-          <>
+          <>    <ProjectModal showModal={showModal} setShowModal={setShowModal} />
+
           <div class="projects-library-wrapper">
   <div class="col-md-3 project-directory text-light">
   <div class="row project-search">
@@ -50,26 +51,25 @@ await fetch('/projects', {
         
   </div>
   <div class="row project-tabs">
-  <div class="list-group project-tabs w-100">
+  <div class="list-group project-tabs p-3 w-100">
     {projects.length >= 1 ? (projects.map((project)=> (
-    <button key={project.id} type="button" onClick={()=>{getProject(project.id)}} class="list-group-item list-project rounded-0 project-link list-group-item-action">
+    <button key={project.id} type="button" onClick={()=>{getProject(project.id)}} class="list-group-item list-project project-link list-group-item-action">
     {project.title}
   </button>
   ))) : (<small class="text-center text-muted m-3">No Projects </small>)}
 </div>
   </div>
   </div>
-  <div className="row-col-md-9 g-0 w-100 m-3 project-panel">
+  <div className="row-col-md-9 g-0 w-100 project-panel p-3">
     {selected ? (<div className="row m-3">
 <nav class="navbar w-100">
   <div class="container-fluid">
    <h1 className="text-light display-3">{selected.title}</h1>
-    <Link to={"/projects/"+selected.id + "/code"} class="btn bg-primary text-light">start</Link>
+    <Link projectId={selected.id} to={"/projects/"+selected.id + "/code"} class="btn bg-primary text-light">start</Link>
   </div>
 </nav>
 <div className="row project-desc w-100 rounded p-3 container-fluid project-preview m-3 text-light">
     <p>{selected.desc}</p>
-    <ProjectModal showModal={showModal} setShowModal={setShowModal} />
 </div>
 </div>) : (<small class="text-light">No Project Selected <i class="far fa-sad-tear"></i></small>)}
 

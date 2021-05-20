@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const path = require("path");
+const fs = require('fs');
 const User = require('../models/User');
 const Project = require('../models/Project');
 const File = require('../models/File');
@@ -112,11 +113,22 @@ router.post('/project', async (req, res)=>{
       user_id:req.session.userId
     }
 
-   await Project.create(projData).then((data) => {
-   
+   await Project.create(projData).then(async (data) => {
+   if (req.body.file){
+     const file = req.body.file;
+     const fileData = {
+       title: file.title,
+       type: file.type,
+        project_id: data.id
+     }
+
+     await File.create(fileData)
+
+     
+   }
       
      
-return res.status(200).json(data)
+ res.status(200).json(data)
    })
   }catch(err){
     return console.log(err);
@@ -138,7 +150,7 @@ router.get('/projects', async (req, res) => {
   }
 })
 
-router.get('/projects/code/:id', async (req, res) => {
+router.get('/projects/:id/code', async (req, res) => {
   try{
 const projectData = await Project.findByPk(req.params.id)
 
@@ -146,6 +158,19 @@ const project = projectData.get({plain: true});
 
 return res.status(200).json(project);
   }catch(err){
+    return res.status(500).json(err);
+  }
+})
+
+router.get('/profile', async (req, res) => {
+  try{
+    const profileData = await User.findByPk(req.session.userId)
+
+    const profile = profileData.get({plain: true});
+
+return res.status(200).json(profile);
+  }catch(err){
+    console.log(err);
     return res.status(500).json(err);
   }
 })

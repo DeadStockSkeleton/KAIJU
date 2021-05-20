@@ -17,9 +17,6 @@ File.init({
   type: {
     type: DataTypes.STRING,
   },
-  file: {
-      type: DataTypes.STRING
-  },
   project_id: {
     type: DataTypes.INTEGER,
     references: {

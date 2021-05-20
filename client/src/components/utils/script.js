@@ -68,7 +68,7 @@ export default {
   , createProject: async function(body, file){
     await fetch('/project', {
       method: 'POST',
-      body:JSON.stringify({body}, {file}),
+      body:JSON.stringify({body, file}),
       headers: { 'Content-Type': 'application/json' },
     }).then((res) => {
       console.log(res);

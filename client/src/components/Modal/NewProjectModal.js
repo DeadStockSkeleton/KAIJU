@@ -22,14 +22,9 @@ function createProject(){
 
     console.log(desc)
 
-    if (title && fileName){
      Script.createProject(body, file) 
     //  Script.createFile(file)  
-    }else if (title){
-        Script.createProject(body) 
-    }else{
-        return;
-    }
+    
 }
 function handleProject(titleVal){
     if (titleVal.length > 0){
