@@ -15,14 +15,18 @@ File.init({
     allowNull: false,
   },
   uid: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true
   }, 
   type: {
     type: DataTypes.STRING,
   },
-  
+  edited: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+  },
   project_id: {
     type: DataTypes.INTEGER,
     references: {
@@ -30,11 +34,14 @@ File.init({
       key: "id",
     },
   },
-  edited: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW,
+  user_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: "user",
+      key: "id",
+    },
   },
+  
   
   
 },

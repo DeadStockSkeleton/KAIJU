@@ -1,7 +1,6 @@
 const User = require('./User');
 const Project = require('./Project');
 const File = require('./File');
-const { default: ProjectsLibrary } = require('../client/src/components/Projects/ProjectsLibrary');
 
 Project.hasMany(File, {
     as: "file",
@@ -16,6 +15,10 @@ File.belongsTo(Project, {
 User.hasMany(Project, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
+})
+
+User.hasMany(File, {
+    foreignKey: 'user_id',
 })
 
 Project.belongsTo(User,{

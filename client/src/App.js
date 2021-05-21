@@ -7,6 +7,7 @@ import Dashboard from './components/pages/Dashboard';
 import Community from './components/pages/Community';
 import Code from './components/pages/Code';
 import Navbar from './components/Navbar/Navbar';
+import Live from './components/pages/Live'
 import PrivateRoute from './components/pages/PrivateRoute'
 function App(){
 return (
@@ -24,6 +25,7 @@ return (
         <PrivateRoute exact path='/projects' component={Project}/>
         <PrivateRoute exact path='/projects/:id/code' component={Code}/>
         <PrivateRoute exact path='/community' component={Community}/>
+        <PrivateRoute exact path='/live/:id' component={Live}/>
      </Switch>   
       </Router>
   

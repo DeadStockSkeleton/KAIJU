@@ -16,7 +16,7 @@
     background-color: transparent;
 }
 
-.login-true, .Dashboard, .tab-wrapper{
+.login-true, .Dashboard{
     background-color: #1b1b20;
 }
 
@@ -331,12 +331,13 @@ width: 50px;;
 .user-modal::after{
     content: " ";
   position: absolute;
-  top: 0%; /* At the bottom of the tooltip */
+  top: -7%; /* At the bottom of the tooltip */
   left: 50%;
   margin-left: 32%;
-  border-width: 5px;
+  border-width: 10px;
   border-style: solid;
-  border-color: #0d6dfd transparent transparent transparent;
+  transform: rotate(180deg);
+  border-color: #1b1b20 transparent transparent transparent;
 }
 
 .card-header{
@@ -367,6 +368,7 @@ width: 50px;;
 
 .active-file{
    opacity: 1;
+   color:#0d6dfd;
 }
 
 .file-cont{

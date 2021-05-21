@@ -325,10 +325,13 @@ router.get('/projects/:id/code', async (req, res) => {
 router.get('/profile', async (req, res) => {
   try{
     const profileData = await User.findByPk(req.session.userId)
+if (profileData){
+  const profile = profileData.get({plain: true});
+  return res.status(200).json(profile);
+}
+    
 
-    const profile = profileData.get({plain: true});
 
-return res.status(200).json(profile);
   }catch(err){
     console.log(err);
     return res.status(500).json(err);
