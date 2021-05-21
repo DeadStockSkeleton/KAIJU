@@ -353,6 +353,33 @@ width: 50px;;
     background-color: rgb(211, 211, 211);
 }
 
+.file-tab{
+    opacity: .5;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    max-height: inherit ;
+}
+
+.file-tab:hover{
+    opacity: 1;
+}
+
+.active-file{
+   opacity: 1;
+}
+
+.file-cont{
+    width: 100%;
+}
+.current-project{
+    text-overflow: ellipsis;
+}
+
+.tab-wrapper{
+    max-height: 50px;
+}
+
 @media only screen and (max-width: 600px) {
     .signup-form{
         width: 100%;

@@ -10,7 +10,7 @@ const [selected, setSelected] = useState("")
     setShowModal(prev => !prev)
   }
 function getProject(id){
- fetch(`/projects/${id}/code`, {
+ fetch(`/projects/${id}`, {
    method: 'GET'
  }).then((res => res.json())).then((data)=>{
   setSelected(data);

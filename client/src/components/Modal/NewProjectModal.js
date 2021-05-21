@@ -79,8 +79,8 @@ function handleType(typeVal){
             class="form-select form-select-sm type-select"
           >
             <option value="html">.html</option>
-            <option value="Projects">.css</option>
-            <option value="Post">.js</option>
+            <option value="css">.css</option>
+            <option value="js">.js</option>
           </select>
 
           <div class="Box position-absolute overflow-hidden jump-to-suggestions js-jump-to-suggestions-container d-none"></div>

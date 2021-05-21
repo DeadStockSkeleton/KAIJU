@@ -30,7 +30,7 @@ class Account extends Component {
    return (
     <>
       <label class=" account-wrapper mx-3 rounded p-0 position-relative d-flex">
-        <button onClick={this.toggle}  class="btn profile-btn text-light"><i class="fas fa-user"></i><small className="mx-3 text-muted account-text">{this.state.username}</small> </button>
+        <button onFocus={this.toggle}  class="btn profile-btn text-light"><i class="fas fa-user"></i><small className="mx-3 text-muted account-text">{this.state.username}</small> </button>
             {this.state.opened ? (<span class="user-modal">
             <div class="card text-light account-card">
   <ul class="list-group list-group-flush">

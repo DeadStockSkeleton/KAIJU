@@ -13,10 +13,16 @@ File.init({
   title: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  uid: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    unique: true
   }, 
   type: {
     type: DataTypes.STRING,
   },
+  
   project_id: {
     type: DataTypes.INTEGER,
     references: {
