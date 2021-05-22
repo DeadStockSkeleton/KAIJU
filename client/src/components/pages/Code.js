@@ -159,7 +159,7 @@ const id = props.match.params.id;
         setShowModal={setShowModal}
       />
       {live ? <NewWindow title="Live Code">{parse(
-        `<style>${css}</style><>${html}</><script>${js}</script>`
+        `<style>${css}</style>${html}`
       )}</NewWindow> : null}
       <div class="control-panel-wrapper w-100">
         <div class=" d-flex p-3 bg-light">
