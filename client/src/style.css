@@ -6,7 +6,6 @@
 
 .navbar{
     width: inherit;
-    
 }
 
 
@@ -38,6 +37,8 @@
 }
 .search-wrapper:hover, .project-desc:hover, .project-title:hover{
     background-color: #1b1b20;
+    height: inherit;
+    max-height: 100%;
 }
 input{
     opacity: .5;
@@ -46,13 +47,8 @@ input:hover{
     opacity: .7;
 }
 
-#root{
-    overflow: hidden;
-    max-height: 50%;
-}
-.editor, .ace_scroller{
-    max-height: 95%;
-}
+
+
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
@@ -126,12 +122,17 @@ input[type="color"]:focus,
     overflow: scroll;
 }
 
-.project-panel{
-    overflow-x: hidden;
-    overflow-y: auto;
+.project-panel, .row{
+    max-height: 100%;
 
 }
 
+.project-panel{
+    overflow: scroll;
+}
+#root{
+    overflow: hidden;
+}
 .add-btn{
     border: 1px solid #2b2b2e; 
     color: white;
@@ -175,6 +176,22 @@ select {
 .signup-form{
     width: 50%;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: #1b1b20;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #2b2b2e;
+    border-radius: 5px;
+  }
 
 
 
@@ -249,6 +266,8 @@ a,a:hover{
     display: flex;
     background-color: #16161d;
     height: 100%;
+    max-height: 100%;
+
 }
 
 .select-active{
@@ -264,16 +283,12 @@ a,a:hover{
 
 .project-tabs{
     max-height: 100%;
-    overflow: scroll;
 }
 .regActive:hover, .select-active:hover{
     color: white;
     background-color:#0d6dfd;
 }
 
-.list-group, .project-tabs{
-    overflow: hidden;
-}
 
 .nav-tabs{
     background-color: #16161d;
@@ -282,6 +297,12 @@ a,a:hover{
 .dash-tab{
     opacity: 1;
     background-color: #1b1b20;
+}
+
+.account-wrapper{
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
 }
 .newProjectModal{
     z-index: 999;
@@ -301,7 +322,7 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 9999999999;
+    z-index: 9999;
 }
 
 .project-title{
@@ -334,6 +355,7 @@ width: 50px;;
 top: 50%;
 transform: translate(-50%,-50%);
 background-color: #16161d;
+z-index: 9999999999999;
 
 }
 .user-modal::after{
@@ -403,6 +425,7 @@ background-color: #16161d;
 
 
 
+
 @media only screen and (max-width: 600px) {
     .signup-form{
         width: 100%;
@@ -422,10 +445,6 @@ background-color: #16161d;
     .search-form{
         width: inherit;
     }
-
-    .project-search{
-        display: none;
-    }
     .projects-library-wrapper{
         display: block;
     }
@@ -434,7 +453,14 @@ background-color: #16161d;
         overflow: scroll;
     }
 
-    .modal-bg, .account-text{
+    .modal-bg, .account-text, .newFileBtn, .control-panel-btn > i{
         display: none;
+    }
+
+    .tab-wrapper{
+        height: inherit;
+    }
+    .account-wrapper{
+        position: relative;
     }
   }

@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import Account from './Account';
+import React, { Component } from 'react';
+
 class Lbar extends Component {
     state = {
-        searchType: 'Username'
+        searchType: 'Projects'
     }
 
     handleChange = (event) => {
@@ -17,9 +17,9 @@ class Lbar extends Component {
           <select onChange={this.handleChange}
             class="form-select form-select-sm search-select"
           >
-            <option value="Username">@</option>
+
             <option value="Projects">/</option>
-            <option value="Post">#</option>
+            
           </select>
           <input
             type="text"
@@ -30,11 +30,10 @@ class Lbar extends Component {
             autocomplete="off"
           />
 
-          <div class="Box position-absolute overflow-hidden jump-to-suggestions js-jump-to-suggestions-container d-none"></div>
         </label>
       </form>
 
-      <Account />
+      
     </div>
     </>
   );}

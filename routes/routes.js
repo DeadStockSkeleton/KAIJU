@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const path = require("path");
 const fs = require('fs');
 const multer  = require('multer')
 
@@ -10,6 +9,7 @@ const session = require('express-session');
 const express = require("express");
 const { v4: uuidv4 } = require('uuid');
 const sequelize = require('../config/connection');
+const { findAll } = require("../models/User");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
@@ -292,6 +292,7 @@ const projectData = await Project.findByPk(req.params.id)
 
 const project = projectData.get({plain: true});
 
+
 return res.status(200).json(project);
   }catch(err){
     return res.status(500).json(err);
@@ -507,6 +508,47 @@ router.post('/saving', async (req, res) => {
 
       return res.status(200).json("saved")
     })
+  }catch(err){
+    return res.status(404).json(err)
+  }
+})
+
+router.get('/delete/project/:id', async (req, res) => {
+  try{
+    const filesData = await File.findAll({where: {project_id:req.params.id}})
+    const files = filesData.map((file) => file.get({plain: true}))
+    if (files){
+      for (let i = 0; i < files.length; i++){
+        fs.unlinkSync(`${files[i].uid}.${files[i].type}`);
+      }
+      return res.status(200).json(files)
+    }else{
+      return res.status(200).json('no files');
+    }
+  }catch(err){
+    return res.status(404).json(err)
+  }
+})
+
+router.delete('/delete/project/:id', async (req, res) => {
+  try{
+    const files = await File.destroy({
+      where: {
+        project_id:req.params.id 
+      }
+    })
+
+    const project = await Project.destroy({
+      where: {
+        id:req.params.id 
+      }
+    })
+
+    if (!files){
+      res.status(404).end()
+    }
+
+    return res.status(200).json({files, project})
   }catch(err){
     return res.status(404).json(err)
   }

@@ -20,7 +20,6 @@ function createProject(){
         type: fileType
     }
 
-    console.log(desc)
 
      Script.createProject(body, file) 
     //  Script.createFile(file)  
@@ -29,7 +28,6 @@ function createProject(){
 function handleProject(titleVal){
     if (titleVal.length > 0){
         setTitle(titleVal);
-    console.log(title);
     }
     
 }
@@ -37,7 +35,6 @@ function handleProject(titleVal){
 function handleDesc(descVal){
     if (descVal.length > 0){
         setDesc(descVal)
-        console.log(desc);
     }
 }
 
@@ -47,6 +44,10 @@ function handleFileName(fileVal){
 
 function handleType(typeVal){
     setFileType(typeVal)
+}
+
+function closeModal(){
+    setShowModal(false)
 }
     return (
           <>
@@ -80,7 +81,6 @@ function handleType(typeVal){
           >
             <option value="html">.html</option>
             <option value="css">.css</option>
-            <option value="js">.js</option>
           </select>
 
           <div class="Box position-absolute overflow-hidden jump-to-suggestions js-jump-to-suggestions-container d-none"></div>
@@ -88,6 +88,7 @@ function handleType(typeVal){
       </form>
           <div class='d-flex'>
               <button onClick={() =>{createProject()}} class="btn m-2 btn-primary">Create</button>
+              <button  class="btn btn-outline-secondary btn-sm m-2" onClick={(()=>{closeModal()})}>cancel</button>
           </div>
 
 

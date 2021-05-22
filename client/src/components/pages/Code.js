@@ -1,28 +1,28 @@
-import React, { Component, useEffect, useState } from "react";
-import { render } from "react-dom";
-import _ from "lodash";
-import Editor, { useMonaco } from "@monaco-editor/react";
+import React, { useEffect, useState } from "react";
+import Editor from "@monaco-editor/react";
 import NewWindow from "react-new-window";
 import parse from "html-react-parser";
 import NewFileModal from "../Modal/NewFileModal";
 import Script from '../utils/script'
+import { Link } from "react-router-dom";
 function Code(props) {
-  const monaco = useMonaco();
   const [files, setFiles] = useState([]);
-  const [fileType, setFileType] = useState(null);
+  const [fileType, setFileType] = useState('html');
   const [fileContent, setFileContent] = useState("");
   const [live, setLive] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [saving, setSaved] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [html, setHtml] = useState(fileContent);
   const [css, setCss] = useState(fileContent);
   const [js, setJs] = useState(fileContent);
+  const [currentProj, setProj] = useState('')
   function save(file, type, content){
     Script.saveFile(file, type, content)
   }
-  function onChange(newValue) {
-    setFileContent(newValue);
+ 
+  function onChange(newValue){
+    
+      setFileContent(newValue);
     save(selectedFile, fileType, fileContent)
     switch (fileType){
       case "html":
@@ -34,20 +34,23 @@ function Code(props) {
       default:
         return 0;
     }
-    
   }
-
+const id = props.match.params.id;
   useEffect(() => {
     getFiles();
+    getProject(id)
+    if (files.length > 0){
+      getFile(files[0].uid, files[0].type )
+    }
+    
   }, []);
-  const id = props.match.params.id;
+  
   function getFiles() {
     fetch(`/projects/${id}/code`, {
       method: "GET",
     })
       .then((data) => data.json())
       .then((res) => {
-        console.log(res);
         setFiles(res);
       });
   }
@@ -63,7 +66,14 @@ function Code(props) {
         return 0;
     }
   }
-
+  function getProject(id){
+    fetch(`/projects/${id}`, {
+      method: 'GET'
+    }).then((res => res.json())).then((data)=>{
+     setProj(data)
+   })
+   
+   }
   function getLang(type) {
     switch (type) {
       case "html":
@@ -79,7 +89,6 @@ function Code(props) {
 
   async function startServer() {
     setLive(!live);
-    filterHTML(fileContent)
   }
   async function getFile(id, type) {
     setFileType(type);
@@ -91,12 +100,19 @@ function Code(props) {
       .then((data) => data.json())
       .then((res) => {
         setFileContent(res);
+        switch (type) {
+          case "html":
+        return setHtml(res)
+      case "css":
+        return setCss(res)
+      case "js":
+        return setJs(res)
+      default:
+        return 0;
+        }
       });
   }
-  function filterHTML(file){
-    const filtered = file.match(/<head[^>]*>((.|[\n\r])*)<\/head>/im)
-  console.log(filtered)
-  }
+ 
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
@@ -105,6 +121,7 @@ function Code(props) {
   return (
     <>
       <NewFileModal
+      currentProj={currentProj}
         id={props.match.params.id}
         showModal={showModal}
         setShowModal={setShowModal}
@@ -114,8 +131,8 @@ function Code(props) {
       )}</NewWindow> : null}
       <div class="control-panel-wrapper w-100">
         <div class=" d-flex p-3 bg-light">
-          {files.length === 3 ? null : (
-            <button onClick={openModal} className="btn control-panel-btn">
+          {files.length === 6 ? null : (
+            <button onClick={openModal} className="btn newFileBtn control-panel-btn">
               <i class="fas fa-plus"></i>
             </button>
           )}
@@ -134,15 +151,7 @@ function Code(props) {
                 <i class="fas fa-play"></i>
               )}
             </button>
-          
-          <button
-            onClick={() => {
-              getFiles();
-            }}
-            className="btn float-end control-panel-btn"
-          >
-            <i class="fas fa-wrench"></i>
-          </button>
+        
         </div>
       </div>
       <div className="editor-wrapper w-100 d-flex">
@@ -174,7 +183,8 @@ function Code(props) {
             : null}
         </div>
         <div className="current-project bg-light mx-3 pe-3 d-flex">
-          <span></span>
+
+          <Link to="/" class="text-dark"><small><i class="fas fa-home"></i></small></Link>
         </div>
       </div>
     </>

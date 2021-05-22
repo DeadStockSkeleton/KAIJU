@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import Script from '../utils/script'
 import { Redirect, Route } from 'react-router-dom'
 
 const PrivateRoute = (props) => {

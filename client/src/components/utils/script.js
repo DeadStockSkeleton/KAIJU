@@ -39,6 +39,23 @@ export default {
           });
     }
   },
+  deleteProject: async function(id){
+    await fetch('/delete/project/'+id, {
+      method: 'GET'
+    }).then((res) => {
+      if (res.status === 200) {
+        return res.json()
+      }
+    }).then(async (data)=>{
+      if (data){
+await fetch('/delete/project/'+id,{
+  method: 'DELETE'
+}).then(()=>{
+  return window.location.href = "/";
+})
+      }
+    });
+  },
 
   Logout: function(){
       fetch ('/logout', {
@@ -72,7 +89,7 @@ export default {
       headers: { 'Content-Type': 'application/json' },
     }).then((res) => {
       console.log(res);
-      return window.location.href = '/projects'
+      return window.location.href = '/'
     })
   },
 
