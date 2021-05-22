@@ -1,8 +1,8 @@
-# Kaiju: Manga Reader
+# KaijuCode
 
 ## Description 
 
-> Read and save mangas
+> Online IDE for HTML and CSS and soon JS
 
 ## Deployed link coming soon
 
