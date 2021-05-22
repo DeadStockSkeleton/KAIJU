@@ -4,8 +4,8 @@
 
 > Online IDE for HTML and CSS and soon JS
 
-## Deployed link coming soon
-
+## Deployed link 
+[Link to KaijuCode](https://desolate-tor-54172.herokuapp.com/)
 ## Usage
 > Create an account and start reading, saving and download mangas
 
