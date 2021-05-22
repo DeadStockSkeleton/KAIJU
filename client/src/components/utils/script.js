@@ -76,10 +76,23 @@ export default {
     })
   },
 
-  createFile: async function(file){
+  createFile: async function(file, id){
     await fetch('/file', {
       method: 'POST',
-      body: JSON.stringify({file})
+      body: JSON.stringify({file, id}),
+      headers: { 'Content-Type': 'application/json' }
+    }).then((res) => {
+      console.log(res);
+      return window.location.reload();
+    })
+  },
+  saveFile: async function(file, type, content){
+    await fetch('/saving', {
+      method: 'POST',
+      body: JSON.stringify({file, type, content}),
+      headers: { 'Content-Type': 'application/json' }
+    }).then((res) => {
+      console.log(res);
     })
   },
 

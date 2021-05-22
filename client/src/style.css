@@ -1,6 +1,6 @@
 *{
     font-family: 'Montserrat', sans-serif;
-    transition: .2s;
+    transition: .3s;
 }
 
 
@@ -301,7 +301,7 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 333;
+    z-index: 9999999999;
 }
 
 .project-title{
@@ -328,6 +328,14 @@ width: 50px;;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+.newFileModal{
+    position: fixed;
+    left: 50%;
+top: 50%;
+transform: translate(-50%,-50%);
+background-color: #16161d;
+
+}
 .user-modal::after{
     content: " ";
   position: absolute;
@@ -381,6 +389,19 @@ width: 50px;;
 .tab-wrapper{
     max-height: 50px;
 }
+
+.control-panel-btn{
+    opacity: .5;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.control-panel-btn:hover{
+    opacity: 1;
+    transition: .3s;
+}
+
+
 
 @media only screen and (max-width: 600px) {
     .signup-form{
