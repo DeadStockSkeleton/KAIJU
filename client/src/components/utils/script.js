@@ -88,7 +88,7 @@ await fetch('/delete/project/'+id,{
       body:JSON.stringify({body, file}),
       headers: { 'Content-Type': 'application/json' },
     }).then((res) => {
-      console.log(res);
+      
       return window.location.href = '/'
     })
   },
@@ -99,7 +99,7 @@ await fetch('/delete/project/'+id,{
       body: JSON.stringify({file, id}),
       headers: { 'Content-Type': 'application/json' }
     }).then((res) => {
-      console.log(res);
+      
       return window.location.reload();
     })
   },
@@ -108,8 +108,6 @@ await fetch('/delete/project/'+id,{
       method: 'POST',
       body: JSON.stringify({file, type, content}),
       headers: { 'Content-Type': 'application/json' }
-    }).then((res) => {
-      console.log(res);
     })
   },
 
@@ -126,9 +124,7 @@ await fetch('/delete/project/'+id,{
       body: JSON.stringify({query}),
       headers: { 'Content-Type': 'application/json' },
     }).then((res)=>{
-      return res.json()
-    }).then((data)=>{
-      console.log(data)
+      return res
     })
   }
 };

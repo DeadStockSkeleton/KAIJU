@@ -108,9 +108,9 @@ input[type="color"]:focus,
 .profile-icon{
     opacity: 1;;
 }
-.search-select:hover{
+/* .search-select:hover{
     opacity: 1;
-}
+} */
 
 .project-desc:hover{
     background-color: #1b1b20;
@@ -165,6 +165,7 @@ select {
 
 .search-form{
     width: 50%;
+    opacity: .5;
 }
 
 
@@ -175,6 +176,7 @@ select {
 
 .signup-form{
     width: 50%;
+    background-color: transparent;
 }
 
 /* width */

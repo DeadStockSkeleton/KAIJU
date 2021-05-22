@@ -558,12 +558,13 @@ router.delete('/delete/project/:id', async (req, res) => {
 router.post('/search/projects', async (req, res)=>{
   try{
     const projectsData = await Project.findAll({where:{
-      title: {
-        [Op.link]: req.body.query
-      }
+      
+        [Op.contains]:[{ title: req.body.query}]
+      
     }})
 
     const projects = projectsData.map((project) => project.get({plain: true}))
+    console.log(projects)
     res.status(200).json(projects);
   }catch(err){
     return res.status(404).json(err)
