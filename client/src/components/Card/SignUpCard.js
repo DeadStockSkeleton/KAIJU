@@ -1,9 +1,10 @@
-import RegTabs from "../Tabs/RegTabs";
+
 import React, { useState } from "react";
 import script from "../utils/script";
-import SignUp from "../pages/SignUp";
 import { Link } from "react-router-dom";
-import cn from "classnames";
+import { store } from 'react-notifications-component';
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from 'react-toastify'
 function SignUpCard() {
   const [emailQuery, setEmailQuery] = useState("");
   const [emailStatus, setEmailStatus] = useState("false");
@@ -67,10 +68,31 @@ function SignUpCard() {
   }
 
   function createAccount() {
-    script.signUp(emailQuery, userQuery, passQuery);
+   if (emailQuery && userQuery && passQuery){
+
+try{
+  fetch("/signup", {
+    method: "POST",
+    body: JSON.stringify({ userQuery, emailQuery, passQuery }),
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => {
+    if (res.status === 200) {
+      localStorage.setItem('token', "KJtoken");
+      window.location.href = "/";
+      toast.success("You're now Logged-In 🎉 ")
+    }
+  });
+}catch(err){
+   toast.error('Must be a valid email, username and password.😕')
+
+}
+   }else{
+      toast.error('Must be a valid email, username and password.😥')
+   }
   }
   return (
     <>
+    <ToastContainer />
       <div class="container text-center p-5">
           
         <div class="container signup-form">
@@ -79,7 +101,7 @@ function SignUpCard() {
             <input
               id="emailInput"
               onKeyUp={(e) => handleSignUp("email", e.target.value)}
-              type="text"
+              type="email"
               class="form-control text-dark signup-input input-sm"
               placeholder="example@email.com"
               autocapitalize="off"

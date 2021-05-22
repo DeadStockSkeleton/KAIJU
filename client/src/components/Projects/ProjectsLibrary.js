@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import React, {useState, useEffect} from 'react';
 import ProjectModal from '../Modal/NewProjectModal';
 import Script from '../utils/script';
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from 'react-toastify'
 function ProjectsLibrary(props){      
   const [showModal, setShowModal] = useState(false)
 const [projects, setProjects] = useState([])
@@ -29,12 +31,29 @@ await fetch('/projects', {
 }
  
 
-  function warning(id){
+  async function warning(id){
     const key = 'delete ' + selected.title
     var answer = prompt(`Type "${key}" to delete project`);
 
     if (answer === key){
-      Script.deleteProject(id);
+      await fetch('/delete/project/'+id, {
+        method: 'GET'
+      }).then((res) => {
+        if (res.status === 200) {
+          return res.json()
+        }else{
+          toast.error('Failed to delete project 🥲')
+        }
+      }).then(async (data)=>{
+        if (data){
+  await fetch('/delete/project/'+id,{
+    method: 'DELETE'
+  }).then(()=>{
+    toast.info('Project deleted')
+    return window.location.href = "/";
+  })
+        }
+      });
     }else{
       
     }return;
@@ -52,7 +71,9 @@ await fetch('/projects', {
     getProjects();
   }, [])
     return (
-          <>    <ProjectModal showModal={showModal} setShowModal={setShowModal} />
+          <>   
+          <ToastContainer /> 
+          <ProjectModal showModal={showModal} setShowModal={setShowModal} />
 
           <div class="projects-library-wrapper">
   <div class="col-md-3 project-directory text-light">

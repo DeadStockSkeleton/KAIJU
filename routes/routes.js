@@ -32,9 +32,9 @@ router.post('/signup',async  (req,res) => {
   try {
     
       const userCreate = await User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
+        username: req.body.userQuery,
+        email: req.body.emailQuery,
+        password: req.body.passQuery,
         online: true,
       })
         req.session.save(() => {
@@ -56,14 +56,14 @@ router.post('/login', async (req, res) => {
   try{
     const userData = await User.findOne({
       where: {
-        email: req.body.email
+        email: req.body.emailQuery
       }
     })
 
     if (!userData){
       return res.status(404).json({message: 'User not found'})
     }else{
-      const verifyPass =  userData.checkPassword(req.body.pass)
+      const verifyPass =  userData.checkPassword(req.body.passQuery)
 
       if (!verifyPass){
       return res

@@ -1,5 +1,7 @@
 import Script from '../utils/script';
 import React, { useState } from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from 'react-toastify'
 function NewProjectModal({showModal, setShowModal}){
 const [title, setTitle] = useState({
 title: 'Project Tile',
@@ -21,8 +23,25 @@ function createProject(){
     }
 
 
-     Script.createProject(body, file) 
-    //  Script.createFile(file)  
+     if (body){
+         fetch('/project', {
+            method: 'POST',
+            body:JSON.stringify({body, file}),
+            headers: { 'Content-Type': 'application/json' },
+          }).then((res) => {
+            if (res.status === 200){
+                toast.success('Project created! 🥳')
+                return window.location.href = '/'
+            }else{
+                toast.error('Project not created! Please try again')
+
+            }
+            
+          })
+     }else{
+         toast.error('Uh Oh, my bad! Please try again 😖')
+     }
+     
     
 }
 function handleProject(titleVal){
@@ -53,7 +72,8 @@ function closeModal(){
           <>
           {showModal ? 
 
-          (<div class="modal-bg">
+          (<><ToastContainer />
+          <div class="modal-bg">
               <div className="card newProjectModal p-4">
                   <div className="container">
                   <nav class="navbar">
@@ -96,7 +116,8 @@ function closeModal(){
   </div>
                   </div>
               </div>
-          </div>) : (null)}
+          </div></>
+              ) : (null)}
           </>
           
         );

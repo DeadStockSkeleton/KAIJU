@@ -5,6 +5,9 @@ import parse from "html-react-parser";
 import NewFileModal from "../Modal/NewFileModal";
 import Script from '../utils/script'
 import { Link } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from 'react-toastify'
+
 function Code(props) {
   const [files, setFiles] = useState([]);
   const [fileType, setFileType] = useState('html');
@@ -17,7 +20,13 @@ function Code(props) {
   const [js, setJs] = useState(fileContent);
   const [currentProj, setProj] = useState('')
   function save(file, type, content){
-    Script.saveFile(file, type, content)
+    if(file && type && content){
+      Script.saveFile(file, type, content)
+      toast.success('File Saved 👍')
+    }else{
+      toast.error('Failed To Save File 👎')
+    }
+    
   }
  
   function onChange(newValue){
@@ -36,6 +45,7 @@ function Code(props) {
   }
 const id = props.match.params.id;
   useEffect(() => {
+    setLive(false)
     getFiles();
     getProject(id)
     if (files.length > 0){
@@ -50,7 +60,13 @@ const id = props.match.params.id;
     })
       .then((data) => data.json())
       .then((res) => {
-        setFiles(res);
+        if (res){
+         setFiles(res); 
+         toast.success("("+res.length+") File(s) Retrieved 📑")
+        }else{
+          toast.warn('No File(s) Retrieved')
+        }
+        
       });
   }
   function getIcon(type) {
@@ -88,7 +104,23 @@ const id = props.match.params.id;
 
   async function startServer() {
     setLive(!live);
+    if (!live){
+    toast('Preview Is Live ✅',{
+      className: "status-toast",
+      draggable: true,
+      autoClose: 5000
+    })
+  }else{
+    toast('Preview Is Dead 🚫',{
+      className: "status-toast",
+      draggable: true,
+      autoClose: 5000
+    })
   }
+  }
+
+  
+
   async function getFile(id, type) {
     setFileType(type);
     setSelectedFile(id);
@@ -99,7 +131,7 @@ const id = props.match.params.id;
       .then((data) => data.json())
       .then((res) => {
         setFileContent(res);
-        switch (type) {
+        switch (res.type) {
           case "html":
         return setHtml(res)
       case "css":
@@ -119,6 +151,7 @@ const id = props.match.params.id;
   
   return (
     <>
+    <ToastContainer />
       <NewFileModal
       currentProj={currentProj}
         id={props.match.params.id}
@@ -168,8 +201,8 @@ const id = props.match.params.id;
       <div className="tab-wrapper fixed-bottom d-flex p-3 w-100 text-dark bg-light">
         <div className="d-flex file-cont">
           {files
-            ? files.map((file) => (
-                <small
+            ? files.map((file, i) => (
+                <small key={i}
                   onClick={() => getFile(file.uid, file.type)}
                   className={
                     selectedFile === file.uid

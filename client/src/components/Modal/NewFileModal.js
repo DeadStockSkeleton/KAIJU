@@ -1,5 +1,7 @@
 import Script from "../utils/script";
 import React, { useState} from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from 'react-toastify'
 function NewFileModal({ showModal, setShowModal, id, currentProj }) {
   const [fileName, setFileName] = useState("index");
   const [fileType, setFileType] = useState("html");
@@ -16,8 +18,13 @@ function NewFileModal({ showModal, setShowModal, id, currentProj }) {
         title: fileName,
         type: fileType
     }
-
-    Script.createFile(file, id)
+    if (fileName && fileType){
+      Script.createFile(file, id) 
+      toast.success('File Created! ✅')
+    }else{
+        toast.error('Failed To Create File 🚫')
+    }
+    
   }
 
   function closeModal(){
@@ -27,7 +34,7 @@ function NewFileModal({ showModal, setShowModal, id, currentProj }) {
 
   return (
     <>
-      {showModal ? (
+      {showModal ? (<><ToastContainer />
         <div  class="modal-bg">
           <div className="card newFileModal w-50 p-4">
             <nav class="navbar w-100">
@@ -66,7 +73,8 @@ function NewFileModal({ showModal, setShowModal, id, currentProj }) {
 <button type="button" class="btn btn-outline-secondary btn-sm mx-3" onClick={(()=>{closeModal()})}>cancel</button>
             </div>
           </div>
-        </div>
+        </div></>
+          
       ) : null}
     </>
   );

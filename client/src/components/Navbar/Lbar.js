@@ -54,7 +54,7 @@ class Lbar extends Component {
             type="text"
             onChange={this.escFunction}
             class="form-control disabled text-light search-input"
-            placeholder={"Search "+this.state.searchType}
+            placeholder={"Coming Soon... "}
             autocapitalize="off"
             spellcheck="false"
             autocomplete="off"

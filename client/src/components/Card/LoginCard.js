@@ -1,12 +1,11 @@
-import RegTabs from "../Tabs/RegTabs";
+
 import React, { useState } from "react";
-import script from "../utils/script";
-import Login from "../pages/Login";
 import { Link } from "react-router-dom";
-import cn from "classnames";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from 'react-toastify'
 function LoginCard() {
-  const [emailQuery, setEmailQuery] = useState("");
-  const [passQuery, setPassQuery] = useState("");
+  const [emailQuery, setEmailQuery] = useState(undefined);
+  const [passQuery, setPassQuery] = useState(undefined);
   
   function handleLogin(x, value) {
     switch (x) {
@@ -24,14 +23,43 @@ setEmailQuery(value)
     }
   }
 
-  function existingAccount() {
-    script.Login(emailQuery, passQuery);
+  function existingAccount(e) {
+    if (emailQuery && passQuery){
+      try{
+      
+        fetch('/login', {
+            method: "POST",
+            body: JSON.stringify({ emailQuery, passQuery }),
+            headers: { "Content-Type": "application/json" },
+          }).then((res) => {
+            if (res.status === 200) {
+              localStorage.setItem('token', "token");
+              toast.success("You're now Logged-In 🎉 ")
+              return window.location.href = "/";
+              
+            }else{
+              toast.error('Account Not Found! 🥲')
+            }
+            localStorage.removeItem('token');
+            return 0;
+          });
+    
+    }catch(err){
+toast.error('Account Not Found! 🥲')
+    }
+    }else{
+      toast.error('Password and/or Email is incorrect! 😭 ')
+
+    }
+    
+    
   }
   return (
     <>
+    <ToastContainer />
       <div class="container text-center p-5">
           
-        <form class="container signup-form">
+        <div class="container signup-form">
             <h1 className="text-left display-4">Login</h1>
           <label class="form-control mb-4 signup-wrapper p-0 position-relative d-flex flex-justify-between flex-items-center">
             <input
@@ -42,7 +70,7 @@ setEmailQuery(value)
               placeholder="example@email.com"
               autocapitalize="off"
               spellcheck="false"
-              autocomplete="off"
+              autoComplete="off"
             />
             
 
@@ -58,19 +86,19 @@ setEmailQuery(value)
               placeholder="Password"
               autocapitalize="off"
               spellcheck="false"
-              autocomplete="off"
+              autoComplete="off"
             />
             
 
           </label>
           <ul class="nav nav-pills mx-auto nav-fill">
               <li class="nav-item">
-              <span
-                onClick={() => existingAccount()}
+              <button
+                onClick={(e) => existingAccount()}
                 className="nav-link regActive px-5"
               >
                 Login
-              </span>
+              </button>
             </li><li class="nav-item">
               <Link to="/signup" className="nav-link">
                 SignUp
@@ -79,7 +107,7 @@ setEmailQuery(value)
             
             
           </ul>
-        </form>
+        </div>
       </div>
     </>
   );
