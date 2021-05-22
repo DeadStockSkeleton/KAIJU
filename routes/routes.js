@@ -345,7 +345,7 @@ router.get('/auth', (req, res) => {
 router.get('/file/:id/:type', (req, res) => {
   fs.readFile(`./${req.params.id}.${req.params.type}`,'utf8', function(err, data){
     if (err){
-      throw err;
+      res.status(400).json(err)
     }
 
     return res.status(200).json(data)
