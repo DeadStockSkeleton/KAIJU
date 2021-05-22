@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
-
+import Script from '../utils/script';
 class Lbar extends Component {
     state = {
-        searchType: 'Projects'
+        searchType: 'Projects',
+        results: []
     }
 
     handleChange = (event) => {
         this.setState({ searchType: event.target.value });
       };
+
+      search = (e)=>{
+        const query = e.target.value;
+        Script.searchProjects(query)
+
+
+      }
 
   render() {return (
       <>
@@ -23,6 +31,7 @@ class Lbar extends Component {
           </select>
           <input
             type="text"
+            onChange={this.search}
             class="form-control text-light search-input"
             placeholder={"Search "+this.state.searchType}
             autocapitalize="off"

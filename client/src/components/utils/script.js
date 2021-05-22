@@ -119,4 +119,16 @@ await fetch('/delete/project/'+id,{
       headers: { 'Content-Type': 'application/json' },
     })
   }
+,
+  searchProjects: async function(query){
+    await fetch('/search/projects', {
+      method: 'POST',
+      body: JSON.stringify({query}),
+      headers: { 'Content-Type': 'application/json' },
+    }).then((res)=>{
+      return res.json()
+    }).then((data)=>{
+      console.log(data)
+    })
+  }
 };

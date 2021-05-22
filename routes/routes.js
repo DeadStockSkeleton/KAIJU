@@ -9,7 +9,8 @@ const session = require('express-session');
 const express = require("express");
 const { v4: uuidv4 } = require('uuid');
 const sequelize = require('../config/connection');
-const { findAll } = require("../models/User");
+const { Sequelize } = require('sequelize');
+const Op = Sequelize.Op;
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 router.use(express.json());
 router.use(express.urlencoded({extended: true}));
@@ -549,6 +550,21 @@ router.delete('/delete/project/:id', async (req, res) => {
     }
 
     return res.status(200).json({files, project})
+  }catch(err){
+    return res.status(404).json(err)
+  }
+})
+
+router.post('/search/projects', async (req, res)=>{
+  try{
+    const projectsData = await Project.findAll({where:{
+      title: {
+        [Op.link]: req.body.query
+      }
+    }})
+
+    const projects = projectsData.map((project) => project.get({plain: true}))
+    res.status(200).json(projects);
   }catch(err){
     return res.status(404).json(err)
   }
