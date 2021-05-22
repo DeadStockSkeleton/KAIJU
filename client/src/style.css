@@ -453,7 +453,7 @@ z-index: 9999999999999;
         overflow: scroll;
     }
 
-    .modal-bg, .account-text, .newFileBtn, .control-panel-btn > i{
+    .modal-bg,.add-btn, .account-text, .newFileBtn, .control-panel-btn > i{
         display: none;
     }
 

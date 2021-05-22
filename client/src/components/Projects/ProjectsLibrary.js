@@ -6,6 +6,7 @@ function ProjectsLibrary(props){
   const [showModal, setShowModal] = useState(false)
 const [projects, setProjects] = useState([])
 const [selected, setSelected] = useState("")
+const [search, setSearch] = useState('');
   const openModal = () => {
     setShowModal(prev => !prev)
   }
@@ -22,13 +23,11 @@ async function getProjects(){
 await fetch('/projects', {
       method: 'GET',
     }).then((res => res.json())).then((data)=>{
-
+      setSearch(data)
       setProjects(data);
     })
 }
-  useEffect(()=> {
-    getProjects();
-  }, [])
+ 
 
   function warning(id){
     const key = 'delete ' + selected.title
@@ -40,6 +39,18 @@ await fetch('/projects', {
       
     }return;
   }
+  function handleSearch(query){
+    const results = [];
+    for (let i = 0;  i < search.length; i++){
+      if (search[i].title.includes(query)){
+        results.push(search[i])
+      }
+      setProjects(results);
+      
+    }
+  } useEffect(()=> {
+    getProjects();
+  }, [])
     return (
           <>    <ProjectModal showModal={showModal} setShowModal={setShowModal} />
 
@@ -48,7 +59,7 @@ await fetch('/projects', {
   <div class="row project-search">
   <label class="form-control search-wrapper m-3 p-0 position-relative d-flex">
           
-          <input
+          <input onKeyUp={((e)=>{handleSearch(e.target.value)})}
             type="text"
             class="form-control text-light search-input"
             placeholder="Search for Project"
@@ -61,7 +72,7 @@ await fetch('/projects', {
   </div>
   <div class="row project-tabs">
   <div class="list-group project-tabs p-3 w-100">
-    {projects.length >= 1 ? (projects.map((project, i)=> (
+    {projects.length ? (projects.map((project, i)=> (
     <button key={project.id} type="button" onClick={()=>{getProject(project.id)}} class="list-group-item list-project project-link list-group-item-action">
     {project.title}
   </button>
