@@ -23,7 +23,6 @@ function Code(props) {
   function onChange(newValue){
     
       setFileContent(newValue);
-    save(selectedFile, fileType, fileContent)
     switch (fileType){
       case "html":
         return setHtml(newValue)
@@ -151,6 +150,7 @@ const id = props.match.params.id;
                 <i class="fas fa-play"></i>
               )}
             </button>
+            <button onClick={(()=>{save(selectedFile, fileType, fileContent)})} class="btn"><i class="fas fa-save"></i></button>
         
         </div>
       </div>
